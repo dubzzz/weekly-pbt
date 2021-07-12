@@ -1,0 +1,23 @@
+{
+  "type": "module",
+  "name": "weekly-pbt",
+  "version": "0.0.0",
+  "description": "Repository backing **#WeeklyPBT**: _weekly examples of how to test algorithms with Property Based Testing_.",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dubzzz/weekly-pbt.git"
+  },
+  "author": "Nicolas DUBIEN",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dubzzz/weekly-pbt/issues"
+  },
+  "homepage": "https://github.com/dubzzz/weekly-pbt#readme",
+  "devDependencies": {
+    "fast-check": "^2.17.0",
+    "jest": "^27.0.6"
+  }
+}
