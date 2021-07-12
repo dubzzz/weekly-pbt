@@ -1,2 +1,3 @@
 # weekly-pbt
-Weekly examples of how to test algorithms with Property Based Testing
+
+Repository backing **#WeeklyPBT**: _weekly examples of how to test algorithms with Property Based Testing_.
