@@ -25,6 +25,12 @@
     "babel-jest": "^27.0.6",
     "fast-check": "^2.17.0",
     "jest": "^27.0.6",
+    "jest-extended": "^0.11.5",
     "prettier": "^2.3.2"
+  },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "jest-extended"
+    ]
   }
 }
