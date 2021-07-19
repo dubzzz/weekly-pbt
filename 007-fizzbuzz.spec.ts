@@ -1,7 +1,7 @@
 import fc from 'fast-check';
 import { fizzbuzz } from './007-fizzbuzz';
 
-describe('006-fizzbuzz', () => {
+describe('007-fizzbuzz', () => {
   it('should print Fizz whenever divisible by 3', () => {
     fc.assert(
       fc.property(
