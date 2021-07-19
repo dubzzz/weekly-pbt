@@ -1,3 +1,15 @@
+/**
+ * Build a sorted version of the passed array by relying on "<" comparison.
+ *
+ * @param tab - Original array to be sorted
+ *
+ * @returns
+ * Sorted copy of the original array.
+ */
+export function sorted<T>(tab: T[]): T[] {
+  return sortInternal([...tab], 0, tab.length, (a, b) => a < b);
+}
+
 function sortInternal<T>(tab: T[], start: number, end: number, cmp: (a: T, b: T) => boolean): T[] {
   if (end - start < 2) return tab;
 
@@ -16,8 +28,4 @@ function sortInternal<T>(tab: T[], start: number, end: number, cmp: (a: T, b: T)
   sortInternal(tab, start, pivot, cmp);
   sortInternal(tab, pivot + 1, end, cmp);
   return tab;
-}
-
-export function sorted<T>(tab: T[]): T[] {
-  return sortInternal([...tab], 0, tab.length, (a, b) => a < b);
 }

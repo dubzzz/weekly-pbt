@@ -13,6 +13,9 @@
  *
  * @param spacelessMessage - Message without any spaces
  * @param words - List of accepted words (no repeat and at least one character long)
+ *
+ * @returns
+ * All the possible messages made only with the received words that could have led to this spaceless-message.
  */
 export function respace(spacelessMessage: string, words: string[]): string[] {
   return respaceInternal(spacelessMessage, words, 0).map((answer) => answer.join(' '));
