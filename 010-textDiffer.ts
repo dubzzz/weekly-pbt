@@ -1,5 +1,5 @@
 export type DiffLine = {
-  type: 'addition' | 'deletion' | 'kept';
+  type: 'addition' | 'deletion' | 'unchanged';
   content: string;
 };
 
@@ -27,7 +27,7 @@ export function textDiffer(before: string[], after: string[]): DiffLine[] {
     }
     ++indexBefore;
     ++indexAfter;
-    diff.push({ type: 'kept', content: sharedLine });
+    diff.push({ type: 'unchanged', content: sharedLine });
   }
   for (; indexBefore !== before.length; ++indexBefore) {
     diff.push({ type: 'deletion', content: before[indexBefore] });

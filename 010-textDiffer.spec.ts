@@ -3,7 +3,7 @@ import { DiffLine, textDiffer } from './010-textDiffer';
 
 const diffArb = fc.array(
   fc.record<DiffLine>({
-    type: fc.constantFrom('addition', 'deletion', 'kept'),
+    type: fc.constantFrom('addition', 'deletion', 'unchanged'),
     content: fc.lorem({ mode: 'words' }),
   }),
   { minLength: 1 }
@@ -22,8 +22,7 @@ describe('010-textDiffer', () => {
 
         // Assert
         expect(beforeFromDiff(computedDiff)).toEqual(before);
-      }),
-      { seed: 1978373056, path: '0:1:0:0:0:2:2:2', endOnFailure: true }
+      })
     );
   });
 
@@ -43,7 +42,7 @@ describe('010-textDiffer', () => {
     );
   });
 
-  it('should compute the diff having the maximal number of shared lines', () => {
+  it('should compute the diff having the maximal number of unchanged lines', () => {
     fc.assert(
       fc.property(diffArb, (diff) => {
         // Arrange
@@ -54,7 +53,7 @@ describe('010-textDiffer', () => {
         const computedDiff = textDiffer(before, after);
 
         // Assert
-        expect(countKeptLines(computedDiff)).toBeLessThanOrEqual(countKeptLines(diff));
+        expect(countUnchangedLines(computedDiff)).toBeLessThanOrEqual(countUnchangedLines(diff));
       })
     );
   });
@@ -62,8 +61,8 @@ describe('010-textDiffer', () => {
 
 // Helpers
 
-function countKeptLines(diff: DiffLine[]): number {
-  return diff.filter((d) => d.type === 'kept').length;
+function countUnchangedLines(diff: DiffLine[]): number {
+  return diff.filter((d) => d.type === 'unchanged').length;
 }
 function beforeFromDiff(diff: DiffLine[]): string[] {
   return diff.filter((d) => d.type !== 'addition').map((d) => d.content);
