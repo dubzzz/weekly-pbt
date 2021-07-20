@@ -53,7 +53,7 @@ describe('010-textDiffer', () => {
         const computedDiff = textDiffer(before, after);
 
         // Assert
-        expect(countUnchangedLines(computedDiff)).toBeLessThanOrEqual(countUnchangedLines(diff));
+        expect(countUnchangedLines(computedDiff)).toBeGreaterThanOrEqual(countUnchangedLines(diff));
       })
     );
   });
