@@ -4,7 +4,7 @@ import { DiffLine, textDiffer } from './010-textDiffer';
 const diffArb = fc.array(
   fc.record<DiffLine>({
     type: fc.constantFrom('addition', 'deletion', 'unchanged'),
-    content: fc.lorem({ mode: 'words' }),
+    content: fc.hexaString(),
   }),
   { minLength: 1 }
 );
