@@ -4,7 +4,7 @@ export type DiffLine = {
 };
 
 /**
- * Compute the diff between two set of lines
+ * Compute the diff between two sets of lines
  *
  * @param before - Lines before
  * @param after - Lines after
