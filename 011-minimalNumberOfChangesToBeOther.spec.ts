@@ -1,5 +1,5 @@
 import fc from 'fast-check';
-import { levenshteinDistance } from './011-levenshteinDistance';
+import { minimalNumberOfChangesToBeOther } from './011-minimalNumberOfChangesToBeOther';
 
 type Change =
   | { type: 'no-op'; value: string }
@@ -17,7 +17,7 @@ const changeArb = fc.array(
   { minLength: 1 }
 );
 
-describe('011-levenshteinDistance', () => {
+describe('011-minimalNumberOfChangesToBeOther', () => {
   it('should compute the return the minimal number of changes to mutate before into after', () => {
     fc.assert(
       fc.property(changeArb, (changes) => {
@@ -26,7 +26,7 @@ describe('011-levenshteinDistance', () => {
         const after = afterFromChanges(changes);
 
         // Act
-        const numChanges = levenshteinDistance(before, after);
+        const numChanges = minimalNumberOfChangesToBeOther(before, after);
 
         // Assert
         expect(numChanges).toBeLessThanOrEqual(countRequestedOperations(changes));
@@ -38,7 +38,7 @@ describe('011-levenshteinDistance', () => {
     fc.assert(
       fc.property(fc.fullUnicodeString(), (value) => {
         // Arrange / Act
-        const numChanges = levenshteinDistance(value, value);
+        const numChanges = minimalNumberOfChangesToBeOther(value, value);
 
         // Assert
         expect(numChanges).toBe(0);
@@ -54,8 +54,8 @@ describe('011-levenshteinDistance', () => {
         const after = afterFromChanges(changes);
 
         // Act
-        const numChanges = levenshteinDistance(before, after);
-        const numChangesReversed = levenshteinDistance(after, before);
+        const numChanges = minimalNumberOfChangesToBeOther(before, after);
+        const numChangesReversed = minimalNumberOfChangesToBeOther(after, before);
 
         // Assert
         expect(numChangesReversed).toBe(numChanges);

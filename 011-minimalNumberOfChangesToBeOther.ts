@@ -1,14 +1,14 @@
 /**
- * Compute the distance of Levenshtein between two strings
+ * Compute the minimal number of changes to be applied onto stringA to change it into stringB.
+ * In other words: Compute the distance of Levenshtein between two strings
  *
  * @param stringA - The first string to be taken into account
  * @param stringB - The second string to be taken into account
  *
  * @returns
- * The Levenshtein distance is a string metric for measuring the difference between two sequences.
- * The Levenshtein distance between two words is the minimum number of single-character edits (insertions, deletions or substitutions) required to change one word into the other.
+ * Minimal number of single-character edits (insertions, deletions or substitutions) to be applied onto stringA to change it into stringB.
  */
-export function levenshteinDistance(stringA: string, stringB: string): number {
+export function minimalNumberOfChangesToBeOther(stringA: string, stringB: string): number {
   return levenshteinDistanceInternal(stringA, stringB, 0, 0, []);
 }
 
