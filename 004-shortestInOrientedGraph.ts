@@ -3,6 +3,9 @@ export type Edge = { from: number; to: number; length: number };
 /**
  * Find the shortest path in an oriented graph to go from a start node to the end node
  *
+ * Applications in real life:
+ * - Optimal metro path to go from station A to station B
+ *
  * @param startNode - Id of the start node (must be an integer value)
  * @param endNode - Id of the end node (must be an integer value)
  * @param nodes - List containing all the known nodes eligible for the graph (nodes outside this list will be ignored even if edges leading to them exist)
