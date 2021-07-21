@@ -20,10 +20,10 @@ function levenshteinDistanceInternal(
   cache: number[][]
 ): number {
   if (stringA.length <= indexA) {
-    return stringB.length - indexB;
+    return [...stringB.substring(indexB)].length; // [...string] ensures we properly handle unicode characters
   }
   if (stringB.length <= indexB) {
-    return stringA.length - indexA;
+    return [...stringA.substring(indexA)].length;
   }
   if (indexA in cache) {
     if (indexB in cache[indexA]) {
@@ -33,18 +33,20 @@ function levenshteinDistanceInternal(
     cache[indexA] = [];
   }
 
+  const currentA = String.fromCodePoint(stringA.codePointAt(indexA)); // support for characters outside of BMP plan
+  const currentB = String.fromCodePoint(stringB.codePointAt(indexB));
   const minimalCost = Math.min(
-    stringA[indexA] === stringB[indexB]
+    currentA === currentB
       ? // Option #1: We keep it in both as it is the same in both strings
-        levenshteinDistanceInternal(stringA, stringB, indexA + 1, indexB + 1, cache)
+        levenshteinDistanceInternal(stringA, stringB, indexA + currentA.length, indexB + currentB.length, cache)
       : // Option #1': We substitute stringB[indexB] by stringA[indexA]
-        1 + levenshteinDistanceInternal(stringA, stringB, indexA + 1, indexB + 1, cache),
+        1 + levenshteinDistanceInternal(stringA, stringB, indexA + currentA.length, indexB + currentB.length, cache),
     // Option #2: We insert stringB[indexB] at indexA in stringA
     // Option #2': We delete the character at indexB in stringB
-    1 + levenshteinDistanceInternal(stringA, stringB, indexA, indexB + 1, cache),
+    1 + levenshteinDistanceInternal(stringA, stringB, indexA, indexB + currentB.length, cache),
     // Option #3: We insert stringA[indexA] at indexB in stringB
     // Option #3': We delete the character at indexA in stringA
-    1 + levenshteinDistanceInternal(stringA, stringB, indexA + 1, indexB, cache)
+    1 + levenshteinDistanceInternal(stringA, stringB, indexA + currentA.length, indexB, cache)
   );
 
   cache[indexA][indexB] = minimalCost;

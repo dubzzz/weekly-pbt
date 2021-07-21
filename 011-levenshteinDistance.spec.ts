@@ -9,14 +9,12 @@ type Change =
 
 const changeArb = fc.array(
   fc.oneof(
-    fc.record<Change>({ type: fc.constant('no-op'), value: fc.char() }),
-    fc.record<Change>({ type: fc.constant('new'), value: fc.char() }),
-    fc.record<Change>({ type: fc.constant('delete'), value: fc.char() }),
-    fc.record<Change>({ type: fc.constant('update'), from: fc.char(), to: fc.char() })
+    fc.record<Change>({ type: fc.constant('no-op'), value: fc.fullUnicode() }),
+    fc.record<Change>({ type: fc.constant('new'), value: fc.fullUnicode() }),
+    fc.record<Change>({ type: fc.constant('delete'), value: fc.fullUnicode() }),
+    fc.record<Change>({ type: fc.constant('update'), from: fc.fullUnicode(), to: fc.fullUnicode() })
   ),
-  {
-    minLength: 1,
-  }
+  { minLength: 1 }
 );
 
 describe('011-levenshteinDistance', () => {
@@ -38,7 +36,7 @@ describe('011-levenshteinDistance', () => {
 
   it('should never request any changes when moving a string to itself', () => {
     fc.assert(
-      fc.property(fc.string(), (value) => {
+      fc.property(fc.fullUnicodeString(), (value) => {
         // Arrange / Act
         const numChanges = levenshteinDistance(value, value);
 
