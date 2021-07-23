@@ -1,5 +1,5 @@
 import fc from 'fast-check';
-import { DiffLine, textDiffer } from './010-textDiffer';
+import { DiffLine, textDiffer } from './textDiffer';
 
 const diffArb = fc.array(
   fc.record<DiffLine>({
@@ -9,7 +9,7 @@ const diffArb = fc.array(
   { minLength: 1 }
 );
 
-describe('010-textDiffer', () => {
+describe('textDiffer', () => {
   it('should be able to rebuild before given only the diff', () => {
     fc.assert(
       fc.property(diffArb, (diff) => {

@@ -1,6 +1,6 @@
 import fc from 'fast-check';
 import 'jest-extended';
-import { reorderTabs } from './014-reorderTabs';
+import { reorderTabs } from './reorderTabs';
 
 const tabsWithSelectionArb = fc
   .set(fc.nat(), { minLength: 2 })
@@ -18,7 +18,7 @@ const tabsWithSelectionArb = fc
     })
   );
 
-describe('014-reorderTabs', () => {
+describe('reorderTabs', () => {
   it('should group selected tabs together', () => {
     fc.assert(
       fc.property(tabsWithSelectionArb, ({ tabs, selectedTabs, movePosition }) => {

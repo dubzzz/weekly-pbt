@@ -1,7 +1,7 @@
 import fc from 'fast-check';
-import { RaceParticipants, racePodium } from './013-racePodium';
+import { RaceParticipants, racePodium } from './racePodium';
 
-describe('013-racePodium', () => {
+describe('racePodium', () => {
   it('should predict the right podium', () => {
     fc.assert(
       fc.property(tupleN(fc.nat(), 25), (speeds) => {
